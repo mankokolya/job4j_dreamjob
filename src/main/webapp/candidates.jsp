@@ -1,13 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Lenovo
-  Date: 13.02.2021
-  Time: 18:42
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dreamjob.store.Store" %>
-<%@ page import="ru.job4j.dreamjob.model.Post" %>
+<%@ page import="ru.job4j.dreamjob.model.Candidate" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -29,10 +22,11 @@
 </head>
 <body>
 <div class="container pt-3">
+
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Вакансии
+                Кандидаты
             </div>
             <div class="card-body">
                 <table class="table">
@@ -42,9 +36,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <% for (Post post : Store.instOf().findAllPosts()) { %>
+                    <% for (Candidate can : Store.instOf().findAllCandidates()) { %>
                     <tr>
-                        <td><%= post.getName() %></td>
+                        <td><%= can.getName() %></td>
                     </tr>
                     <% } %>
                     </tbody>

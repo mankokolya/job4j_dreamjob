@@ -1,7 +1,7 @@
 <!doctype html>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="ru.job4j.model.Store" %>
-<%@ page import="ru.job4j.model.Post" %>
+<%@ page import="ru.job4j.dreamjob.store.Store" %>
+<%@ page import="ru.job4j.dreamjob.model.Post" %>
 
 <html lang="en">
 <head>

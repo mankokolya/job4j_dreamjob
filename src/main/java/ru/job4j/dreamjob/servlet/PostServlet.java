@@ -13,7 +13,10 @@ public class PostServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        Store.instOf().save(new Post(0, request.getParameter("name")));
+        Store.instOf().save(
+                new Post(
+                        Integer.parseInt(request.getParameter("id")),
+                        request.getParameter("name")));
         response.sendRedirect(request.getContextPath() + "/post/posts.jsp");
     }
 }

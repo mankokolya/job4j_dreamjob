@@ -43,12 +43,18 @@ public class Store {
         posts.put(post.getId(), post);
     }
 
-    public Post findById(int id) {
+    public Post findPostById(int id) {
         return posts.get(id);
     }
 
+    public Candidate findCandidateById(int id) {
+        return candidates.get(id);
+    }
+
     public void save(Candidate candidate) {
-        candidate.setId(candidateId.incrementAndGet());
+        if (candidate.getId() == 0) {
+            candidate.setId(candidateId.incrementAndGet());
+        }
         candidates.put(candidate.getId(), candidate);
     }
 }

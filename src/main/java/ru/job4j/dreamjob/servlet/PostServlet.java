@@ -1,7 +1,7 @@
 package ru.job4j.dreamjob.servlet;
 
 import ru.job4j.dreamjob.model.Post;
-import ru.job4j.dreamjob.store.MemStore;
+import ru.job4j.dreamjob.store.PsqlStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +13,7 @@ public class PostServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        MemStore.instOf().save(
+        PsqlStore.instOf().save(
                 new Post(
                         Integer.parseInt(request.getParameter("id")),
                         request.getParameter("name")));
@@ -22,7 +22,7 @@ public class PostServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("posts", MemStore.instOf().findAllPosts());
+        req.setAttribute("posts", PsqlStore.instOf().findAllPosts());
         req.getRequestDispatcher("/post/posts.jsp").forward(req, resp);
     }
 }

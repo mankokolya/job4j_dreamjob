@@ -11,6 +11,6 @@ public class PsqlMain {
         }
 
         store.save(new Post(1, "Database Admin Job"));
-        System.out.println(store.findById(1).getName());
+        System.out.println(store.findPostById(1).getName());
     }
 }

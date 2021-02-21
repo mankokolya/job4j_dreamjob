@@ -13,8 +13,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class UploadServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(UploadServlet.class);
@@ -22,13 +23,11 @@ public class UploadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<String> images = new ArrayList<>();
-        for (File name : new File("C:\\Users\\Lenovo\\IdeaProjects\\job4j_dreamjob\\images").listFiles()) {
-
-            System.out.println();
-            System.out.println(name.getName());
-            System.out.println();
-
-            images.add(name.getName());
+        File folder = new File("/images");
+        System.out.println(folder.getAbsolutePath());
+        File[] files = folder.listFiles();
+        if (files != null) {
+            images = Arrays.stream(files).map(File::getName).collect(Collectors.toList());
         }
         request.setAttribute("images", images);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/upload/upload.jsp");
@@ -44,13 +43,15 @@ public class UploadServlet extends HttpServlet {
         ServletFileUpload upload = new ServletFileUpload(factory);
         try {
             List<FileItem> items = upload.parseRequest(request);
-            File folder = new File("C:\\Users\\Lenovo\\IdeaProjects\\job4j_dreamjob\\images");
+            File folder = new File("/images");
+            System.out.println("Folder " + folder.getAbsolutePath());
             if (!folder.exists()) {
-                folder.mkdir();
+                System.out.println(folder.mkdir());
             }
             for (FileItem item : items) {
                 if (!item.isFormField()) {
                     File file = new File(folder + File.separator + item.getName());
+                    System.out.println("File " + file.getAbsolutePath());
                     try (FileOutputStream out = new FileOutputStream(file)) {
                         out.write(item.getInputStream().readAllBytes());
                     }

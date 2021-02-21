@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"  session="true" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -23,9 +23,9 @@
             <tbody>
             <c:forEach items="${images}" var="image" varStatus="status">
                 <tr valign="top">
-                    <td><a href='<c:url value="/download?name=${image}"/>'>Download</a></td>
+                    <td><a href="<c:url value='/download?name=${image}'/>">Download</a></td>
                     <td>
-                        <img src='<c:url value="/download?name=${image}"/>' width="100px" height="100px"/>
+                        <img src="<c:url value='/download?name=${image}'/>" width="100px" height="100px"/>
                     </td>
                 </tr>
             </c:forEach>
